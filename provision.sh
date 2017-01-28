@@ -1,5 +1,8 @@
 BASEDIR='/var/node/default/'
 
+cd ${BASEDIR}
+npm install -y
+
 mkdir -p ${BASEDIR}log
 chmod -R g+r /etc/letsencrypt/live/
 chown -R pi /etc/letsencrypt/live/

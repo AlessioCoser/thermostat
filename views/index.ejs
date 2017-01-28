@@ -23,7 +23,6 @@
   </div>
   <script>
     $(document).ready(function(){
-
       function changeHtmlClassesBy(status) {
         var statusClass = status ? 'on' : 'off'
         var buttonClass = status ? 'off' : 'on'
@@ -34,37 +33,48 @@
         $('#changeStatus > .text').html(buttonText)
       }
 
-      function updateStatus() {
-        var toggleStatus = $('#currentState').hasClass('off')
-        $.post('/thermostat/status', {status: toggleStatus}, function(response){
-          console.log(response)
-          if(response.err) {
-            alert('Cannot update!')
-            location.reload()
-            return
-          }
-          changeHtmlClassesBy(response.value)
-        })
+      function hasNoErrors(response) {
+        if(response.err) {
+          location.reload()
+          return false
+        }
+        return true
       }
 
-      function updateTemperature() {
-        $.get('/thermostat/temperature', function(response){
-          if(response.err) {
-            alert('Cannot update temperature!')
-            location.reload()
-            return
-          }
+      function handleStatus(response) {
+        if (hasNoErrors(response)) {
+          changeHtmlClassesBy(response.value)
+        }
+      }
+
+      function handleTemperature(response){
+        if (hasNoErrors(response)) {
           $('#currentTemperature').html(response.value)
-        })
+        }
+      }
+
+      function getTemperature() {
+        $.get('/thermostat/temperature', handleTemperature)
+      }
+
+      function getStatus() {
+        var toggleStatus = $('#currentState').hasClass('off')
+        $.get('/thermostat/status', handleStatus)
+      }
+
+      function updateStatus() {
+        var toggleStatus = $('#currentState').hasClass('off')
+        $.post('/thermostat/status', {status: toggleStatus}, handleStatus)
       }
 
       $('#changeStatus').on('click', function (){
         updateStatus()
       })
 
-      updateStatus()
-      updateTemperature()
-      setInterval(updateTemperature, 30000)
+      getStatus()
+      getTemperature()
+      setInterval(getStatus, 10000)
+      setInterval(getTemperature, 300000)
     })
   </script>
 </body>

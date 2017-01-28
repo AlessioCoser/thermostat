@@ -14,6 +14,22 @@ app.get('/', function (req, res) {
   res.render('index')
 })
 
+app.get('/thermostat/status', function(req, res) {
+  res.json({error: false, response: true})
+})
+
+app.post('/thermostat/status', function(req, res) {
+  res.json({error: false, response: true})
+})
+
+app.get('/thermostat/temperature', function(req, res) {
+  res.json({error: false, response: 19.0})
+})
+
+app.post('/thermostat/temperature', function(req, res) {
+  res.json({error: false, response: 19.0})
+})
+
 app.use("/", express.static(__dirname + '/public'))
 app.set('views', __dirname + '/views')
 app.set('view engine', 'ejs')

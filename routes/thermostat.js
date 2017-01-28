@@ -6,11 +6,18 @@ router.get('/status', function(req, res) {
 })
 
 router.post('/status', function(req, res) {
-  res.json({error: false, value: true})
+  if(typeof req.body.status == "undefined") {
+    res.json({error: true, value: null})
+  } else {
+    var status = (req.body.status === "true")
+
+    res.json({error: false, value: status})
+  }
 })
 
 router.get('/temperature', function(req, res) {
-  res.json({error: false, value: 19.0})
+  var random = (Math.floor(Math.random() * 100) + 1) / 10
+  res.json({error: false, value: random})
 })
 
 module.exports = router

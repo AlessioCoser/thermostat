@@ -25,6 +25,7 @@
   "dependencies": {
     "ejs": "^2.5.5",
     "express": "^4.14.0",
+    "body-parser":"^1.12.0",
     "onoff": "~1.0.3",
     "ds18b20": "^0.1.0"
   },

@@ -5,21 +5,63 @@
   <title>Pi Led Controller</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <link rel="stylesheet" href="/css/style.css">
+  <script type="text/javascript" src="/js/jquery-3.1.1.min.js"></script>
 </style>
 </head>
 <body>
   <div>
-    Temperatura: <span id='currentTemperature'>.. .</span>
+    Temperatura: <span id='currentTemperature'><%= temperature %></span> °C
   </div>
   <div>
-    Stato attuale: <span id='currentState' class='led'></span>
+    Stato attuale: <span id='currentState' class='led <%= status ? 'on' : 'off' %>'></span>
   </div>
   <div class='buttons'>
-    <a href='#' onclick='changeStatus();' class='button' id='changeStatus'>
-      <span class='led small'></span>
-      <span class='text'></span>
+    <a href='#' class='button' id='changeStatus'>
+      <span class='led small <%= status ? 'off' : 'on' %>'></span>
+      <span class='text'><%= status ? 'Spegni' : 'Accendi' %></span>
     </a>
   </div>
+  <script>
+    $(document).ready(function(){
+
+      function updateStatus(status) {
+        var statusClass = status ? 'on' : 'off'
+        var buttonClass = status ? 'off' : 'on'
+        var buttonText = status ? 'Spegni' : 'Accendi'
+
+        $('#currentState').attr('class', 'led ' + statusClass)
+        $('#changeStatus > .led').attr('class', 'led small ' + buttonClass)
+        $('#changeStatus > .text').html(buttonText)
+      }
+
+      function updateTemperature() {
+        $.get('/thermostat/temperature', function(response){
+          if(response.err) {
+            alert('Cannot update temperature!')
+            location.reload()
+            return
+          }
+          $('#currentTemperature').html(response.value)
+        })
+      }
+
+      $('#changeStatus').on('click', function (){
+        var toggleStatus = $('#currentState').hasClass('off')
+        $.post('/thermostat/status', {status: toggleStatus}, function(response){
+          console.log(response)
+          if(response.err) {
+            alert('Cannot update!')
+            location.reload()
+            return
+          }
+          updateStatus(response.value)
+        })
+      })
+
+      updateTemperature()
+      setInterval(updateTemperature, 30000)
+    })
+  </script>
 </body>
 </html>
 

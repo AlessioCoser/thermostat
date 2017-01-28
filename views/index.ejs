@@ -8,7 +8,18 @@
 </style>
 </head>
 <body>
-  Hello!
+  <div>
+    Temperatura: <span id='currentTemperature'>.. .</span>
+  </div>
+  <div>
+    Stato attuale: <span id='currentState' class='led'></span>
+  </div>
+  <div class='buttons'>
+    <a href='#' onclick='changeStatus();' class='button' id='changeStatus'>
+      <span class='led small'></span>
+      <span class='text'></span>
+    </a>
+  </div>
 </body>
 </html>
 

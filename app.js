@@ -20,7 +20,7 @@ app.set('views', __dirname + '/views')
 app.set('view engine', 'ejs')
 
 app.get('/', function (req, res) {
-  res.render('index', {status: true, temperature: "19 °C"})
+  res.render('index')
 })
 
 app.use('/thermostat', thermostat)

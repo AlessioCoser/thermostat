@@ -10,21 +10,21 @@
 </head>
 <body>
   <div>
-    Temperatura: <span id='currentTemperature'><%= temperature %></span> °C
+    Temperatura: <span id='currentTemperature'>.. .</span> °C
   </div>
   <div>
-    Stato attuale: <span id='currentState' class='led <%= status ? 'on' : 'off' %>'></span>
+    Stato attuale: <span id='currentState' class='led'></span>
   </div>
   <div class='buttons'>
     <a href='#' class='button' id='changeStatus'>
-      <span class='led small <%= status ? 'off' : 'on' %>'></span>
-      <span class='text'><%= status ? 'Spegni' : 'Accendi' %></span>
+      <span class='led small'></span>
+      <span class='text'></span>
     </a>
   </div>
   <script>
     $(document).ready(function(){
 
-      function updateStatus(status) {
+      function changeHtmlClassesBy(status) {
         var statusClass = status ? 'on' : 'off'
         var buttonClass = status ? 'off' : 'on'
         var buttonText = status ? 'Spegni' : 'Accendi'
@@ -32,6 +32,19 @@
         $('#currentState').attr('class', 'led ' + statusClass)
         $('#changeStatus > .led').attr('class', 'led small ' + buttonClass)
         $('#changeStatus > .text').html(buttonText)
+      }
+
+      function updateStatus() {
+        var toggleStatus = $('#currentState').hasClass('off')
+        $.post('/thermostat/status', {status: toggleStatus}, function(response){
+          console.log(response)
+          if(response.err) {
+            alert('Cannot update!')
+            location.reload()
+            return
+          }
+          changeHtmlClassesBy(response.value)
+        })
       }
 
       function updateTemperature() {
@@ -46,18 +59,10 @@
       }
 
       $('#changeStatus').on('click', function (){
-        var toggleStatus = $('#currentState').hasClass('off')
-        $.post('/thermostat/status', {status: toggleStatus}, function(response){
-          console.log(response)
-          if(response.err) {
-            alert('Cannot update!')
-            location.reload()
-            return
-          }
-          updateStatus(response.value)
-        })
+        updateStatus()
       })
 
+      updateStatus()
       updateTemperature()
       setInterval(updateTemperature, 30000)
     })

@@ -1,0 +1,12 @@
+#!/bin/bash
+export TZ="TZ='Europe/Rome'"
+BASEDIR='/var/node/default/'
+
+modprobe wire
+modprobe w1-gpio
+modprobe w1-therm
+
+iptables -t nat -A PREROUTING -p tcp --dport 80 -j REDIRECT --to-port 3000
+iptables -t nat -A PREROUTING -p tcp --dport 443 -j REDIRECT --to-port 5555
+
+su - pi -c "forever --uid 'production' -a -o ${BASEDIR}log/out.log -e ${BASEDIR}log/err.log start ${BASEDIR}app.js"

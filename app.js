@@ -3,6 +3,8 @@
 var express = require('express')
 var fs = require('fs')
 var app = express()
+var router = express.Router()
+var thermostat = require('./routes/thermostat')
 var https = require('https')
 var server = https.createServer({
   key: fs.readFileSync('/etc/letsencrypt/live/default/privkey.pem'),
@@ -14,21 +16,7 @@ app.get('/', function (req, res) {
   res.render('index')
 })
 
-app.get('/thermostat/status', function(req, res) {
-  res.json({error: false, response: true})
-})
-
-app.post('/thermostat/status', function(req, res) {
-  res.json({error: false, response: true})
-})
-
-app.get('/thermostat/temperature', function(req, res) {
-  res.json({error: false, response: 19.0})
-})
-
-app.post('/thermostat/temperature', function(req, res) {
-  res.json({error: false, response: 19.0})
-})
+app.use('/thermostat', thermostat)
 
 app.use("/", express.static(__dirname + '/public'))
 app.set('views', __dirname + '/views')

@@ -1,23 +1,33 @@
 var express = require('express')
 var router = express.Router()
 
+var TemperatureSensor = require('../lib/temperature-sensor')
+var Rele = require('../lib/rele')
+
+var rele = new Rele(17)
+var sensor = new TemperatureSensor()
+
 router.get('/status', function(req, res) {
-  res.json({error: false, value: true})
+  res.json({error: false, value: rele.isOn()})
 })
 
 router.post('/status', function(req, res) {
-  if(typeof req.body.status == "undefined") {
+  var statusParam = req.body.status
+  if(typeof statusParam == "undefined") {
     res.json({error: true, value: null})
-  } else {
-    var status = (req.body.status === "true")
-
-    res.json({error: false, value: status})
   }
+
+  if (statusParam === "true") {
+    rele.turnOn()
+  } else {
+    rele.turnOff()
+  }
+
+  res.json({error: false, value: rele.isOn()})
 })
 
 router.get('/temperature', function(req, res) {
-  var random = (Math.floor(Math.random() * 100) + 1) / 10
-  res.json({error: false, value: random})
+  res.json({error: false, value: sensor.temperature()})
 })
 
 module.exports = router

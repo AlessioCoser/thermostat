@@ -23,11 +23,12 @@
     "url": "https://github.com/AlessioCoser/thermostat/issues"
   },
   "dependencies": {
+    "body-parser": "^1.12.0",
+    "ds18b20": "^0.1.0",
     "ejs": "^2.5.5",
     "express": "^4.14.0",
-    "body-parser":"^1.12.0",
-    "onoff": "~1.0.3",
-    "ds18b20": "^0.1.0"
+    "lowdb": "^0.14.0",
+    "onoff": "~1.0.3"
   },
   "devDependencies": {
     "mocha": "^3.2.0"

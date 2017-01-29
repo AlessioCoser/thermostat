@@ -43,3 +43,11 @@
   border: 1px solid #c3bdbd;
   color: black;
 }
+
+header.off{
+  background: #31b0d5 !important;
+}
+
+header.on{
+  background: #ec971f !important;
+}

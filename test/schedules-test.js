@@ -3,13 +3,12 @@ const Schedule = require('../lib/schedule')
 const Schedules  = require('../lib/schedules')
 const LowDB = require('lowdb')
 var db = LowDB()
+var schedules = new Schedules(db)
 
 describe('Schedules', function () {
-
-  describe('all', function () {
+  describe('all()', function () {
     it('should return an empty array without elements', function() {
       db.setState({schedules: []})
-      var schedules = new Schedules(db)
 
       assert.deepEqual(schedules.all(), [])
     })
@@ -19,7 +18,6 @@ describe('Schedules', function () {
       db.setState({schedules: [obj]})
       var expectedSchedule = new Schedule(obj)
 
-      var schedules = new Schedules(db)
       assert.deepEqual(schedules.all(), [expectedSchedule])
     })
 
@@ -27,8 +25,40 @@ describe('Schedules', function () {
       var invalid = {id: 1, temperature: 19}
       db.setState({schedules: [invalid]})
 
-      var schedules = new Schedules(db)
       assert.deepEqual(schedules.all(), [])
+    })
+  })
+
+  describe('add()', function() {
+    it("shouldn't add invalid schedule", function() {
+      var invalid = {id: 1, temperature: 19}
+      db.setState({schedules: []})
+
+      assert(schedules.add(invalid) === false)
+      assert.deepEqual(schedules.all(), [])
+    })
+
+    it("should add first schedule with id 1", function() {
+      var schedule = {temperature: 19, fromTime: '09:00', toTime: '12:00', days: 'week'}
+      db.setState({schedules: []})
+
+      expectedResult = schedule
+      expectedResult.id = 1
+
+      assert.deepEqual(schedules.add(schedule), expectedResult)
+      assert.deepEqual(schedules.all()[0].toJson(), expectedResult)
+    })
+
+    it("should add schedule with id (max-id + 1)", function() {
+      var oldSchedule = {id: 18, temperature: 20, fromTime: '09:00', toTime: '12:00', days: 'week'}
+      db.setState({schedules: [oldSchedule]})
+      var newSchedule = {temperature: 19, fromTime: '14:00', toTime: '18:00', days: 'saturday'}
+
+      expectedResult = newSchedule
+      expectedResult.id = 19
+
+      assert.deepEqual(schedules.add(newSchedule), expectedResult)
+      assert.deepEqual(schedules.all()[1].toJson(), expectedResult)
     })
   })
 })

@@ -5,7 +5,9 @@
   "main": "app.js",
   "scripts": {
     "test": "mocha test",
-    "express": "express"
+    "express": "express",
+    "lint": "standard",
+    "lint:fix": "standard --fix"
   },
   "author": "Alessio Coser",
   "repository": {
@@ -31,6 +33,19 @@
     "onoff": "~1.0.3"
   },
   "devDependencies": {
-    "mocha": "^3.2.0"
+    "mocha": "^3.2.0",
+    "standard": "^8.6.0"
+  },
+  "standard": {
+    "globals": [
+      "describe",
+      "context",
+      "before",
+      "beforeEach",
+      "after",
+      "afterEach",
+      "it",
+      "expect"
+    ]
   }
 }

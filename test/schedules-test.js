@@ -61,4 +61,19 @@ describe('Schedules', function () {
       assert.deepEqual(schedules.all()[1], new Schedule(expectedResult))
     })
   })
+
+  describe('find()', function() {
+    it("should returns false if id not found", function() {
+      db.setState({schedules: []})
+
+      assert.equal(schedules.find(1), false)
+    })
+
+    it("should returns found schedule", function() {
+      var saved = {id: 1, temperature: 20, fromTime: '09:00', toTime: '12:00', days: 'week'}
+      db.setState({schedules: [saved]})
+
+      assert.deepEqual(schedules.find(1), new Schedule(saved))
+    })
+  })
 })

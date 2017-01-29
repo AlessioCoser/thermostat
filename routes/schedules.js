@@ -10,6 +10,15 @@ router.get('/', function(req, res) {
   res.json({error: false, value: all})
 })
 
+router.get('/:scheduleId', function(req, res) {
+  var schedule = schedules.find(parseInt(req.params.scheduleId))
+  if(schedule === false) {
+    res.json({error: true, value: "Schedule not found"})
+    return
+  }
+  res.json({error: false, value: schedule.toJson()})
+})
+
 router.post('/new', function(req, res) {
   var schedule = schedules.add({
     temperature: req.body.temperature,

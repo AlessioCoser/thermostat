@@ -77,4 +77,45 @@ describe('Schedules', function () {
       assert.deepEqual(schedules.find(1), new Schedule(saved))
     })
   })
+
+  describe('current()', function () {
+    var weekFriday = {id: 1, temperature: 15, fromTime: '09:00', toTime: '10:00', days: 'week'}
+    var weekSaturday = {id: 3, temperature: 17, fromTime: '09:00', toTime: '10:00', days: 'saturday'}
+    var weekSunday = {id: 5, temperature: 19, fromTime: '09:00', toTime: '10:00', days: 'sunday'}
+    var saved = [
+      weekFriday,
+      {id: 2, temperature: 16, fromTime: '12:00', toTime: '13:00', days: 'week'},
+      weekSaturday,
+      {id: 4, temperature: 18, fromTime: '12:00', toTime: '13:00', days: 'saturday'},
+      weekSunday,
+      {id: 6, temperature: 20, fromTime: '12:00', toTime: '13:00', days: 'sunday'}
+    ]
+
+    it('should returns the current week schedule', function () {
+      db.setState({schedules: saved})
+
+      var friday = new Date(2017, 00, 27, 9, 30, 00)
+      var schedules = new Schedules(db, friday)
+
+      assert.deepEqual(schedules.current(), new Schedule(weekFriday))
+    })
+
+    it('should returns the current saturday schedule', function () {
+      db.setState({schedules: saved})
+
+      var saturday = new Date(2017, 00, 28, 9, 30, 00)
+      var schedules = new Schedules(db, saturday)
+
+      assert.deepEqual(schedules.current(), new Schedule(weekSaturday))
+    })
+
+    it('should returns the current sunday schedule', function () {
+      db.setState({schedules: saved})
+
+      var sunday = new Date(2017, 00, 29, 9, 30, 00)
+      var schedules = new Schedules(db, sunday)
+
+      assert.deepEqual(schedules.current(), new Schedule(weekSunday))
+    })
+  })
 })

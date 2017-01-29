@@ -2,15 +2,15 @@ var express = require('express')
 var router = express.Router()
 
 var Schedules = require('../lib/schedules')
-var LowDB = require('lowdb')
-var db = LowDB('/var/node/default/db/db.json')
+var db = require('lowdb')('/var/node/default/db/db.json')
 var schedules = new Schedules(db)
 
-router.get('/all', function(req, res) {
-  res.json({error: false, value: schedules.all().map(schedule => schedule.toJson())})
+router.get('/', function(req, res) {
+  var all = schedules.all().map(schedule => schedule.toJson())
+  res.json({error: false, value: all})
 })
 
-router.post('/add', function(req, res) {
+router.post('/new', function(req, res) {
   var schedule = schedules.add({
     temperature: req.body.temperature,
     fromTime: req.body.fromTime,

@@ -5,7 +5,6 @@ var fs = require('fs')
 var app = express()
 var bodyParser = require("body-parser");
 var router = express.Router()
-var thermostat = require('./routes/thermostat')
 var https = require('https')
 var server = https.createServer({
   key: fs.readFileSync('/etc/letsencrypt/live/default/privkey.pem'),
@@ -23,7 +22,8 @@ app.get('/', function (req, res) {
   res.render('index')
 })
 
-app.use('/thermostat', thermostat)
+app.use('/thermostat', require('./routes/thermostat'))
+app.use('/schedules', require('./routes/schedules'))
 
 server.listen(5555)
 app.listen(3000, function () {

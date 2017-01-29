@@ -45,8 +45,8 @@ describe('Schedules', function () {
       expectedResult = schedule
       expectedResult.id = 1
 
-      assert.deepEqual(schedules.add(schedule), expectedResult)
-      assert.deepEqual(schedules.all()[0].toJson(), expectedResult)
+      assert.deepEqual(schedules.add(schedule), new Schedule(expectedResult))
+      assert.deepEqual(schedules.all()[0], new Schedule(expectedResult))
     })
 
     it("should add schedule with id (max-id + 1)", function() {
@@ -57,8 +57,8 @@ describe('Schedules', function () {
       expectedResult = newSchedule
       expectedResult.id = 19
 
-      assert.deepEqual(schedules.add(newSchedule), expectedResult)
-      assert.deepEqual(schedules.all()[1].toJson(), expectedResult)
+      assert.deepEqual(schedules.add(newSchedule), new Schedule(expectedResult))
+      assert.deepEqual(schedules.all()[1], new Schedule(expectedResult))
     })
   })
 })

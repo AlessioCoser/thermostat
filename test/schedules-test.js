@@ -96,7 +96,7 @@ describe('Schedules', function () {
     it('should returns the current week schedule', function () {
       db.setState({schedules: saved})
 
-      var friday = new Date(2017, 00, 27, 9, 30, 00)
+      var friday = new Date(2017, 0, 27, 9, 30, 0)
       var schedules = new Schedules(db, friday)
 
       assert.deepEqual(schedules.current(), new Schedule(weekFriday))
@@ -105,7 +105,7 @@ describe('Schedules', function () {
     it('should returns the current saturday schedule', function () {
       db.setState({schedules: saved})
 
-      var saturday = new Date(2017, 00, 28, 9, 30, 00)
+      var saturday = new Date(2017, 0, 28, 9, 30, 0)
       var schedules = new Schedules(db, saturday)
 
       assert.deepEqual(schedules.current(), new Schedule(weekSaturday))
@@ -114,7 +114,7 @@ describe('Schedules', function () {
     it('should returns the current sunday schedule', function () {
       db.setState({schedules: saved})
 
-      var sunday = new Date(2017, 00, 29, 9, 30, 00)
+      var sunday = new Date(2017, 0, 29, 9, 30, 0)
       var schedules = new Schedules(db, sunday)
 
       assert.deepEqual(schedules.current(), new Schedule(weekSunday))

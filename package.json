@@ -35,5 +35,10 @@
   "devDependencies": {
     "m.test": "0.0.44",
     "standard": "^8.6.0"
+  },
+  "standard": {
+    "ignore": [
+      "/public/"
+    ]
   }
 }

@@ -23,7 +23,7 @@ class Rele {
 }
 
 class TemperatureSensor {
-  constructor(temp) {
+  constructor (temp) {
     this._temp = temp || 19.2
   }
   temperature () {

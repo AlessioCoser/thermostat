@@ -1,5 +1,9 @@
+const describe = require('m.test').test
+const it = describe
 const assert = require('assert')
-const {Rele, TemperatureSensor} = require('./test_helper')
+const testHelper = require('./test_helper')
+const Rele = testHelper.Rele
+const TemperatureSensor = testHelper.TemperatureSensor
 const Thermostat = require('../lib/thermostat')
 
 describe('Thermostat', function () {

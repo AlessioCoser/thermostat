@@ -1,3 +1,5 @@
+const describe = require('m.test').test
+const it = describe
 const assert = require('assert')
 const TemperatureSensor = require('../lib/temperature-sensor')
 

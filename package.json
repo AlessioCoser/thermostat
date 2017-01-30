@@ -4,7 +4,7 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "test": "mocha test",
+    "test": "m.test -g '*-test.js'",
     "express": "express",
     "lint": "standard",
     "lint:fix": "standard --fix"
@@ -33,19 +33,7 @@
     "onoff": "~1.0.3"
   },
   "devDependencies": {
-    "mocha": "^3.2.0",
+    "m.test": "0.0.44",
     "standard": "^8.6.0"
-  },
-  "standard": {
-    "globals": [
-      "describe",
-      "context",
-      "before",
-      "beforeEach",
-      "after",
-      "afterEach",
-      "it",
-      "expect"
-    ]
   }
 }

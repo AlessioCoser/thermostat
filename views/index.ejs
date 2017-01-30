@@ -1,41 +1,10 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="">
-  <meta name="author" content="">
-
-  <title>Home Thermostat</title>
-
-  <!-- Bootstrap Core CSS -->
-  <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
-  <!-- Theme CSS -->
-  <link href="/css/freelancer.min.css" rel="stylesheet">
-
-  <!-- Custom Fonts -->
-  <link href="/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
-  <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
-
-
-
-  <link rel="stylesheet" href="/css/style.css">
-</style>
+  <%- include header.ejs %>
 </head>
 <body id="page-top" class="index">
-
-  <nav id="mainNav" class="navbar navbar-default navbar-fixed-top navbar-custom">
-      <div class="container">
-          <!-- Brand and toggle get grouped for better mobile display -->
-          <div class="navbar-header page-scroll">
-              <a class="navbar-brand" href="#page-top">Termostato</a>
-          </div>
-      </div>
-      <!-- /.container-fluid -->
-  </nav>
+  <%- include navigator.ejs %>
 
   <header>
       <div class="container">
@@ -62,75 +31,7 @@
     </div>
   </section>
 
-  <script type="text/javascript" src="/js/jquery-3.1.1.min.js"></script>
-
-  <!-- Bootstrap Core JavaScript -->
-  <script src="/vendor/bootstrap/js/bootstrap.min.js"></script>
-
-  <!-- Theme JavaScript -->
-  <script src="js/freelancer.min.js"></script>
-
-  <script>
-    $(document).ready(function(){
-      function changeHtmlClassesBy(status) {
-        var statusClass = status ? 'on' : 'off'
-        var statusText = status ? 'Acceso' : 'Spento'
-        var buttonClass = status ? 'btn-info' : 'btn-warning'
-        var iconClass = status ? 'fa-power-off' : 'fa-fire'
-        var buttonText = status ? 'Spegni' : 'Accendi'
-
-        $('header').attr('class', statusClass)
-        $('#currentState').attr('class', 'star-light ' + statusClass)
-        $('#currentText').html(statusText)
-        $('#changeStatus').attr('class', 'btn btn-large ' + buttonClass)
-        $('#changeStatus > i').attr('class', 'fa ' + iconClass)
-        $('#changeStatus > span').html(buttonText)
-      }
-
-      function hasNoErrors(response) {
-        if(response.err) {
-          location.reload()
-          return false
-        }
-        return true
-      }
-
-      function handleStatus(response) {
-        if (hasNoErrors(response)) {
-          changeHtmlClassesBy(response.value)
-        }
-      }
-
-      function handleTemperature(response){
-        if (hasNoErrors(response)) {
-          $('#currentTemperature').html(response.value)
-        }
-      }
-
-      function getTemperature() {
-        $.get('/thermostat/temperature', handleTemperature)
-      }
-
-      function getStatus() {
-        var toggleStatus = $('#currentState').hasClass('off')
-        $.get('/thermostat/status', handleStatus)
-      }
-
-      function updateStatus() {
-        var toggleStatus = $('#currentState').hasClass('off')
-        $.post('/thermostat/status', {status: toggleStatus}, handleStatus)
-      }
-
-      $('#changeStatus').on('click', function (){
-        updateStatus()
-      })
-
-      getStatus()
-      getTemperature()
-      setInterval(getStatus, 10000)
-      setInterval(getTemperature, 300000)
-    })
-  </script>
+  <% include footer.ejs %>
 </body>
 </html>
 

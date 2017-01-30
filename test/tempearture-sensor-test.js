@@ -1,5 +1,3 @@
-const describe = require('m.test').test
-const it = describe
 const assert = require('assert')
 const TemperatureSensor = require('../lib/temperature-sensor')
 
@@ -7,6 +5,10 @@ describe('TemperatureSensor', function () {
   var sensor = new TemperatureSensor()
 
   describe('temperature method', function () {
+    it('should not return null', function () {
+      assert(sensor.temperature() !== null)
+    })
+
     it('should return a number', function () {
       assert(typeof sensor.temperature() === 'number')
     })

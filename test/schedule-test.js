@@ -1,5 +1,3 @@
-const describe = require('m.test').test
-const it = describe
 const assert = require('assert')
 const Schedule = require('../lib/schedule')
 

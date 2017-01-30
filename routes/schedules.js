@@ -21,7 +21,7 @@ router.get('/:scheduleId', function (req, res) {
 
 router.post('/new', function (req, res) {
   var schedule = schedules.add({
-    temperature: req.body.temperature,
+    temperature: parseInt(req.body.temperature, 10),
     fromTime: req.body.fromTime,
     toTime: req.body.toTime,
     days: req.body.days

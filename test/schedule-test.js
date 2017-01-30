@@ -29,6 +29,13 @@ describe('Schedule', function () {
     assert(!schedule.isValid())
   })
 
+  it('should not be valid if temperature is 0', function () {
+    var opt = {id: 1, temperature: 0, fromTime: '09:00', toTime: '12:00', days: 'week'}
+    var schedule = new Schedule(opt)
+
+    assert(!schedule.isValid())
+  })
+
   it('should not be valid with incorrect hours of fromTime', function () {
     var opt = {id: 1, temperature: 19.3, fromTime: '24:00', toTime: '12:00', days: 'week'}
     var schedule = new Schedule(opt)

@@ -39,6 +39,16 @@
   "standard": {
     "ignore": [
       "/public/"
+    ],
+    "globals": [
+      "describe",
+      "context",
+      "before",
+      "beforeEach",
+      "after",
+      "afterEach",
+      "it",
+      "expect"
     ]
   }
 }

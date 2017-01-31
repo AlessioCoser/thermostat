@@ -5,6 +5,7 @@
   "main": "app.js",
   "scripts": {
     "test": "mocha test",
+    "node": "node",
     "express": "express",
     "lint": "standard",
     "lint:fix": "standard --fix"

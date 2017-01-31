@@ -1,4 +1,9 @@
-const assert = require('assert')
+const ok = require('assert').ok
+const equal = require('assert').equal
+const deepEqual = require('assert').deepEqual
+const describe = require('m.test').test
+const it = require('m.test').test
+
 const LowDB = require('lowdb')
 const Schedule = require('../lib/schedule')
 const Schedules = require('../lib/schedules')
@@ -11,7 +16,7 @@ describe('Schedules', function () {
     it('should return an empty array without elements', function () {
       db.setState({schedules: []})
 
-      assert.deepEqual(schedules.all(), [])
+      deepEqual(schedules.all(), [])
     })
 
     it('should return an array of schedule', function () {
@@ -19,14 +24,14 @@ describe('Schedules', function () {
       db.setState({schedules: [obj]})
       var expectedSchedule = new Schedule(obj)
 
-      assert.deepEqual(schedules.all(), [expectedSchedule])
+      deepEqual(schedules.all(), [expectedSchedule])
     })
 
     it('should return an array of valid schedule', function () {
       var invalid = {id: 1, temperature: 19}
       db.setState({schedules: [invalid]})
 
-      assert.deepEqual(schedules.all(), [])
+      deepEqual(schedules.all(), [])
     })
   })
 
@@ -35,8 +40,8 @@ describe('Schedules', function () {
       var invalid = {id: 1, temperature: 19}
       db.setState({schedules: []})
 
-      assert(schedules.add(invalid) === false)
-      assert.deepEqual(schedules.all(), [])
+      ok(schedules.add(invalid) === false)
+      deepEqual(schedules.all(), [])
     })
 
     it('should add first schedule with id 1', function () {
@@ -46,8 +51,8 @@ describe('Schedules', function () {
       var expectedResult = schedule
       expectedResult.id = 1
 
-      assert.deepEqual(schedules.add(schedule), new Schedule(expectedResult))
-      assert.deepEqual(schedules.all()[0], new Schedule(expectedResult))
+      deepEqual(schedules.add(schedule), new Schedule(expectedResult))
+      deepEqual(schedules.all()[0], new Schedule(expectedResult))
     })
 
     it('should add schedule with id (max-id + 1)', function () {
@@ -58,8 +63,8 @@ describe('Schedules', function () {
       var expectedResult = newSchedule
       expectedResult.id = 19
 
-      assert.deepEqual(schedules.add(newSchedule), new Schedule(expectedResult))
-      assert.deepEqual(schedules.all()[1], new Schedule(expectedResult))
+      deepEqual(schedules.add(newSchedule), new Schedule(expectedResult))
+      deepEqual(schedules.all()[1], new Schedule(expectedResult))
     })
   })
 
@@ -67,14 +72,14 @@ describe('Schedules', function () {
     it('should returns false if id not found', function () {
       db.setState({schedules: []})
 
-      assert.equal(schedules.find(1), false)
+      equal(schedules.find(1), false)
     })
 
     it('should returns found schedule', function () {
       var saved = {id: 1, temperature: 20, fromTime: '09:00', toTime: '12:00', days: 'week'}
       db.setState({schedules: [saved]})
 
-      assert.deepEqual(schedules.find(1), new Schedule(saved))
+      deepEqual(schedules.find(1), new Schedule(saved))
     })
   })
 
@@ -97,7 +102,7 @@ describe('Schedules', function () {
       var friday = new Date(2017, 0, 27, 9, 30, 0)
       var schedules = new Schedules(db, friday)
 
-      assert.deepEqual(schedules.current(), new Schedule(weekFriday))
+      deepEqual(schedules.current(), new Schedule(weekFriday))
     })
 
     it('should returns the current saturday schedule', function () {
@@ -106,7 +111,7 @@ describe('Schedules', function () {
       var saturday = new Date(2017, 0, 28, 9, 30, 0)
       var schedules = new Schedules(db, saturday)
 
-      assert.deepEqual(schedules.current(), new Schedule(weekSaturday))
+      deepEqual(schedules.current(), new Schedule(weekSaturday))
     })
 
     it('should returns the current sunday schedule', function () {
@@ -115,7 +120,7 @@ describe('Schedules', function () {
       var sunday = new Date(2017, 0, 29, 9, 30, 0)
       var schedules = new Schedules(db, sunday)
 
-      assert.deepEqual(schedules.current(), new Schedule(weekSunday))
+      deepEqual(schedules.current(), new Schedule(weekSunday))
     })
   })
 })

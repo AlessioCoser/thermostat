@@ -1,4 +1,7 @@
-const assert = require('assert')
+const ok = require('assert').ok
+const describe = require('m.test').test
+const it = require('m.test').test
+
 const testHelper = require('./test_helper')
 const Rele = testHelper.Rele
 const TemperatureSensor = testHelper.TemperatureSensor
@@ -10,15 +13,15 @@ describe('Thermostat', function () {
       var expectedTemperature = 20
       var thermostat = new Thermostat(new Rele(1), new TemperatureSensor(19.2))
 
-      assert(!thermostat.shouldTurnOn(expectedTemperature))
-      assert(!thermostat.shouldTurnOff(expectedTemperature))
+      ok(!thermostat.shouldTurnOn(expectedTemperature))
+      ok(!thermostat.shouldTurnOff(expectedTemperature))
     })
 
     it('when rele is turned off and temperature is higher than expected', function () {
       var expectedTemperature = 15
       var thermostat = new Thermostat(new Rele(1), new TemperatureSensor(19.2))
 
-      assert(!thermostat.shouldTurnOn(expectedTemperature))
+      ok(!thermostat.shouldTurnOn(expectedTemperature))
     })
   })
 
@@ -27,7 +30,7 @@ describe('Thermostat', function () {
       var expectedTemperature = 20
       var thermostat = new Thermostat(new Rele(0), new TemperatureSensor(15))
 
-      assert(thermostat.shouldTurnOn(expectedTemperature))
+      ok(thermostat.shouldTurnOn(expectedTemperature))
     })
   })
 
@@ -36,7 +39,7 @@ describe('Thermostat', function () {
       var expectedTemperature = 20
       var thermostat = new Thermostat(new Rele(1), new TemperatureSensor(20))
 
-      assert(thermostat.shouldTurnOff(expectedTemperature))
+      ok(thermostat.shouldTurnOff(expectedTemperature))
     })
   })
 })

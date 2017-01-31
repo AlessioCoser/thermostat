@@ -4,8 +4,8 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "test": "mocha test",
     "node": "node",
+    "test": "m.test",
     "express": "express",
     "lint": "standard",
     "lint:fix": "standard --fix"
@@ -34,7 +34,7 @@
     "onoff": "~1.0.3"
   },
   "devDependencies": {
-    "mocha": "^3.2.0",
+    "m.test": "0.0.45",
     "standard": "^8.6.0"
   },
   "standard": {
@@ -42,14 +42,7 @@
       "/public/"
     ],
     "globals": [
-      "describe",
-      "context",
-      "before",
-      "beforeEach",
-      "after",
-      "afterEach",
-      "it",
-      "expect"
+      "test"
     ]
   }
 }

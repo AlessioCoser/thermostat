@@ -29,3 +29,7 @@ https://thepihut.com/blogs/raspberry-pi-tutorials/18095732-sensors-temperature-w
 Look to see whether there is a line that has dtoverlay=w1-gpio in it.  If not, add the following to the end of the file:
 
     dtoverlay=w1-gpio
+
+### set correct timezone and other options on raspberry pi
+
+    sudo raspi-config

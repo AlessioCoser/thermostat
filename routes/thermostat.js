@@ -8,6 +8,21 @@ var rele = new Rele(17)
 var sensor = new TemperatureSensor()
 var thermostat = new Thermostat(rele, sensor)
 
+var db = require('lowdb')('/var/node/default/db/db.json')
+var Schedules = require('../lib/schedules')
+
+setInterval(function() {
+  var schedules = new Schedules(db)
+  var currentSchedule = schedules.current()
+  var expectedTemperature = null
+
+  if (currentSchedule) {
+    expectedTemperature = currentSchedule.temperature()
+  }
+
+  thermostat.checkTemperature(expectedTemperature)
+}, 60000)
+
 router.get('/status', function (req, res) {
   res.json({error: false, value: thermostat.getStatus()})
 })

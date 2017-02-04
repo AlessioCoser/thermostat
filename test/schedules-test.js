@@ -94,6 +94,16 @@ test('Schedules', function () {
       {id: 6, temperature: 20, fromTime: '12:00', toTime: '13:00', days: 'sunday'}
     ]
 
+    test('should returns null if there is no current schedules', function() {
+      db.setState({schedules: saved})
+
+      var outOfSchedules = new Date(2017, 0, 27, 8, 30, 0)
+      var schedules = new Schedules(db, outOfSchedules)
+
+      equal(schedules.current(), null)
+      ok(typeof schedules.current() !== 'undefined')
+    })
+
     test('should returns the current week schedule', function () {
       db.setState({schedules: saved})
 

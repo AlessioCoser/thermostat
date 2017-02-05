@@ -7,12 +7,13 @@ html, body {
 }
 
 #thermostat-panel {
-  width: 25vw;
-  min-width: 200px;
+  width: 100vw;
+  min-width: none;
   height: 100vh;
   background: #293133;
   color: #E4E5E0;
   text-align: center;
+  overflow: hidden;
 }
 
 #thermostat-panel .temperature {
@@ -29,6 +30,7 @@ html, body {
 #thermostat-panel .current-schedule {
   height: 70vh;
   line-height: 70vh;
+  position: relative;
 }
 
 #thermostat-panel .current-schedule .circle {
@@ -63,23 +65,19 @@ html, body {
   height: 30px;
   line-height: 30px;
   vertical-align: middle;
+  margin-bottom: 5px;
+  opacity: 0.8;
 }
 
-#thermostat-panel .current-schedule .circle .text {
-  display: inline-block;
-  height: 10px;
-  line-height: 10px;
-  vertical-align: middle;
-  font-size: 0.8em;
-  width: 190px;
+#thermostat-panel .current-schedule .circle.on .icon {
+  font-size: 2em;
 }
 
 #thermostat-panel .current-schedule .circle .scheduled-temperature {
   display: inline-block;
   width: 190px;
   font-size: 2.5em;
-  line-height: 1em;
-  margin: 20px 0 5px 0;
+  margin: 10px 0 3px 0;
   height: 50px;
   line-height: 50px;
   vertical-align: middle;
@@ -91,11 +89,74 @@ html, body {
   height: 15px;
   line-height: 15px;
   vertical-align: middle;
-  margin-bottom: 40px;
+  margin-bottom: 50px;
+}
+
+#thermostat-panel .current-schedule > .fa-chevron-down {
+  position: absolute;
+  bottom: 25px;
+  color: white;
+  width: 100px;
+  margin-left: -50px;
+  left: 50%;
+  font-size: 4em;
+  opacity: 0.2;
 }
 
 #thermostat-panel .next-schedule {
   background: #434B4D;
   height: 20vh;
   line-height: 20vh;
+  text-align: left;
+}
+
+#thermostat-panel .next-schedule .circle {
+  background: #6b787b;
+  height: 15vh;
+  width: 15vh;
+  display: inline-block;
+  border-radius: 58px;
+  vertical-align: middle;
+  line-height: 15vh;
+  text-align: center;
+  font-size: 1.3em;
+  margin: 0 20px;
+}
+
+#thermostat-panel .next-schedule .circle > .next-time {
+  display: none
+}
+
+#thermostat-panel .next-schedule > .next-time {
+  display: inline-block;
+  font-size: 1.3em;
+}
+
+@media only screen and (min-width: 500px) {
+  #thermostat-panel {
+    width: 25vw;
+    min-width: 200px;
+  }
+
+  #thermostat-panel .next-schedule {
+    text-align: center;
+  }
+
+  #thermostat-panel .next-schedule .circle {
+    line-height: 3vh;
+  }
+
+  #thermostat-panel .next-schedule .circle > .temp {
+    margin-top: 4.3vh;
+    display: inline-block;
+  }
+
+  #thermostat-panel .next-schedule .circle > .next-time {
+    display: inline-block;
+    font-size: 0.7em;
+  }
+
+  #thermostat-panel .next-schedule > .next-time {
+    display: none;
+  }
 }

@@ -60,14 +60,18 @@ class ThermostatPanel extends React.Component {
             <div className='icon'>
               <i className={this.state.status ? 'fa fa-fire' : 'fa fa-power-off'} aria-hidden="true"></i>
             </div>
-            <div className='text'>{this.state.status ? 'Acceso' : 'Spento'}</div>
             <div className='scheduled-temperature'>{this.state.schedule.temperature} °C</div>
             <div className='scheduled-time'>{schedulePeriod}</div>
           </div>
         </div>
+        <i className="fa fa-chevron-down" aria-hidden="true"></i>
       </div>
       <div className='next-schedule'>
-
+        <span className='circle'>
+          <span className='temp'>{this.state.schedule.temperature} °C</span>
+          <span className='next-time'>{schedulePeriod}</span>
+        </span>
+        <span className='next-time'>{schedulePeriod}</span>
       </div>
     </div>)
   }

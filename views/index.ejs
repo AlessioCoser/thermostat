@@ -4,32 +4,7 @@
   <%- include header.ejs %>
 </head>
 <body id="page-top" class="index">
-  <%- include navigator.ejs %>
-
-  <header>
-      <div class="container">
-          <div class="row">
-              <div class="col-lg-12">
-                  <div class="intro-text">
-                      <span class="name"><span id='currentTemperature'>... ..</span> °C</span>
-                      <hr class="star-light" id='currentState'>
-                      <span class="skills">Stato attuale: <span id='currentText'></span></span>
-                  </div>
-              </div>
-          </div>
-      </div>
-  </header>
-
-  <section id="home">
-    <div class="row">
-        <div class="col-lg-12" style="text-align:center">
-          <button class='btn btn-large btn-success' id='changeStatus'>
-          <i class="fa"></i>&nbsp;
-          <span></span>
-          </button>
-        </div>
-    </div>
-  </section>
+  <div id='temperature-panel'></div>
 
   <% include footer.ejs %>
 </body>

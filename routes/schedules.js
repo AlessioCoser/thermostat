@@ -10,6 +10,17 @@ router.get('/', function (req, res) {
   res.json({error: false, value: all})
 })
 
+
+router.get('/current', function (req, res) {
+  var schedule = schedules.current()
+
+  if (schedule === null) {
+    res.json({error: false, value: {temperature: 5, fromTime: null, toTime: null}})
+  } else {
+    res.json({error: false, value: schedule.toJson()})
+  }
+})
+
 router.get('/:scheduleId', function (req, res) {
   var schedule = schedules.find(parseInt(req.params.scheduleId, 10))
   if (schedule === false) {

@@ -13,10 +13,12 @@ class ThermostatPanel extends React.Component {
   componentDidMount() {
     this.getStatus()
     this.getCurrentSchedule()
+    this.getNextSchedule()
 
     setInterval(() => {
       this.getStatus()
       this.getCurrentSchedule()
+      this.getNextSchedule()
     }, 5000)
 
     this.getTemperature()

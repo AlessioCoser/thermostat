@@ -1,9 +1,16 @@
 {
   "schedules": [{
     "id": 1,
-    "temperature": 29,
-    "fromTime": "18:00",
+    "temperature": 25,
+    "fromTime": "16:00",
     "toTime": "19:00",
-    "days": "saturday"
+    "days": "sunday"
+  },
+  {
+    "id": 2,
+    "temperature": 18,
+    "fromTime": "19:00",
+    "toTime": "23:00",
+    "days": "sunday"
   }]
 }

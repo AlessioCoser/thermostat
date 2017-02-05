@@ -1,0 +1,101 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  width: 100vw;
+  font-family: Montserrat
+}
+
+#thermostat-panel {
+  width: 25vw;
+  min-width: 200px;
+  height: 100vh;
+  background: #293133;
+  color: #E4E5E0;
+  text-align: center;
+}
+
+#thermostat-panel .temperature {
+  background: #434B4D;
+  height: 10vh;
+  line-height: 10vh;
+  font-size: 1.3em;
+}
+
+#thermostat-panel .temperature .fa {
+  margin-right: 10px;
+}
+
+#thermostat-panel .current-schedule {
+  height: 70vh;
+  line-height: 70vh;
+}
+
+#thermostat-panel .current-schedule .circle {
+  overflow: hidden;
+  display: inline-block;
+  line-height: 190px;
+  margin: -90px auto;
+  width: 190px;
+  height: 190px;
+  background: #31b0d5;
+  -webkit-border-radius: 95px;
+  -moz-border-radius: 95px;
+  -ms-border-radius: 95px;
+  -o-border-radius: 95px;
+  border-radius: 95px;
+}
+
+#thermostat-panel .current-schedule .circle.on {
+  background: #ec971f;
+}
+
+#thermostat-panel .current-schedule .circle .circle-inner {
+  display: inline-block;
+  line-height: 10px;
+  vertical-align: middle;
+}
+
+#thermostat-panel .current-schedule .circle .icon {
+  display: inline-block;
+  width: 190px;
+  font-size: 1.5em;
+  height: 30px;
+  line-height: 30px;
+  vertical-align: middle;
+}
+
+#thermostat-panel .current-schedule .circle .text {
+  display: inline-block;
+  height: 10px;
+  line-height: 10px;
+  vertical-align: middle;
+  font-size: 0.8em;
+  width: 190px;
+}
+
+#thermostat-panel .current-schedule .circle .scheduled-temperature {
+  display: inline-block;
+  width: 190px;
+  font-size: 2.5em;
+  line-height: 1em;
+  margin: 20px 0 5px 0;
+  height: 50px;
+  line-height: 50px;
+  vertical-align: middle;
+}
+
+#thermostat-panel .current-schedule .circle .scheduled-time {
+  display: inline-block;
+  width: 190px;
+  height: 15px;
+  line-height: 15px;
+  vertical-align: middle;
+  margin-bottom: 40px;
+}
+
+#thermostat-panel .next-schedule {
+  background: #434B4D;
+  height: 20vh;
+  line-height: 20vh;
+}

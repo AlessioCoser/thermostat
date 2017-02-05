@@ -5,7 +5,8 @@ class ThermostatPanel extends React.Component {
       url: props.url,
       status: null,
       temperature: '.. .',
-      schedule: {}
+      schedule: {},
+      nextSchedule: {}
     }
   }
 
@@ -36,6 +37,13 @@ class ThermostatPanel extends React.Component {
     })
   }
 
+  getNextSchedule() {
+    ajax.get('/schedules/next')
+    .then((schedule) => {
+      this.setState({nextSchedule: schedule})
+    })
+  }
+
   getTemperature() {
     ajax.get('/thermostat/temperature')
     .then((temperature) => {
@@ -43,12 +51,16 @@ class ThermostatPanel extends React.Component {
     })
   }
 
-  render() {
-    var schedulePeriod = ''
-
-    if (this.state.schedule.fromTime && this.state.schedule.toTime) {
-      schedulePeriod = this.state.schedule.fromTime + " - " + this.state.schedule.toTime
+  parsePeriod(schedule) {
+    if (schedule.fromTime && schedule.toTime) {
+      return schedule.fromTime + " - " + schedule.toTime
     }
+    return ''
+  }
+
+  render() {
+    var schedulePeriod = this.parsePeriod(this.state.schedule)
+    var nextSchedulePeriod = this.parsePeriod(this.state.nextSchedule)
 
     return (<div>
       <div className='temperature'>
@@ -68,10 +80,10 @@ class ThermostatPanel extends React.Component {
       </div>
       <div className='next-schedule'>
         <span className='circle'>
-          <span className='temp'>{this.state.schedule.temperature} °C</span>
-          <span className='next-time'>{schedulePeriod}</span>
+          <span className='temp'>{this.state.nextSchedule.temperature} °C</span>
+          <span className='next-time'>{nextSchedulePeriod}</span>
         </span>
-        <span className='next-time'>{schedulePeriod}</span>
+        <span className='next-time'>{nextSchedulePeriod}</span>
       </div>
     </div>)
   }

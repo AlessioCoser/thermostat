@@ -131,4 +131,26 @@ test('Schedules', function () {
       deepEqual(schedules.current(), new Schedule(weekSunday))
     })
   })
+
+  test('next()', function () {
+    var nextSchedule = {id: 2, temperature: 16, fromTime: '11:00', toTime: '12:00', days: 'week'}
+    var nextSaturdaySchedule = {id: 4, temperature: 18, fromTime: '12:00', toTime: '13:00', days: 'saturday'}
+    var saved = [
+      {id: 1, temperature: 15, fromTime: '09:00', toTime: '10:00', days: 'week'},
+      nextSchedule,
+      {id: 3, temperature: 17, fromTime: '09:00', toTime: '10:00', days: 'saturday'},
+      nextSaturdaySchedule,
+      {id: 5, temperature: 19, fromTime: '09:00', toTime: '10:00', days: 'sunday'},
+      {id: 6, temperature: 20, fromTime: '12:00', toTime: '13:00', days: 'sunday'}
+    ]
+
+    test('should returns the next schedule', function() {
+      db.setState({schedules: saved})
+
+      var fridayTime = new Date(2017, 0, 27, 9, 30, 0)
+      var schedules = new Schedules(db, fridayTime)
+
+      deepEqual(schedules.next(), new Schedule(nextSchedule))
+    })
+  })
 })

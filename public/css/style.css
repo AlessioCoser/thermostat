@@ -149,6 +149,7 @@ html, body {
   #thermostat-panel .next-schedule .circle > .temp {
     margin-top: 4.3vh;
     display: inline-block;
+    width: 15vh
   }
 
   #thermostat-panel .next-schedule .circle > .next-time {

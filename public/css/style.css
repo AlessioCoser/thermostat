@@ -6,9 +6,12 @@ html, body {
   font-family: Montserrat
 }
 
+* {
+  box-sizing: border-box;
+}
+
 #thermostat-panel {
   width: 100vw;
-  min-width: none;
   height: 100vh;
   background: #293133;
   color: #E4E5E0;
@@ -107,7 +110,6 @@ html, body {
   background: #434B4D;
   height: 20vh;
   line-height: 20vh;
-  text-align: left;
 }
 
 #thermostat-panel .next-schedule .circle {
@@ -117,47 +119,43 @@ html, body {
   display: inline-block;
   border-radius: 58px;
   vertical-align: middle;
-  line-height: 15vh;
+  line-height: 3vh;
   text-align: center;
   font-size: 1.3em;
   margin: 0 20px;
 }
 
+#thermostat-panel .next-schedule .circle > .temp {
+  margin-top: 4.4vh;
+  display: inline-block;
+  width: 15vh
+}
+
 #thermostat-panel .next-schedule .circle > .next-time {
-  display: none
+  display: inline-block;
+  font-size: 0.5em;
 }
 
 #thermostat-panel .next-schedule > .next-time {
-  display: inline-block;
-  font-size: 1.3em;
+  display: none;
 }
 
-@media only screen and (min-width: 500px) {
+#schedule-panel {
+  display: none;
+  width: 100vw;
+  height: 100vh;
+  overflow-y: auto;
+}
+
+@media only screen and (min-width: 768px) {
   #thermostat-panel {
     width: 25vw;
-    min-width: 200px;
+    float: left;
   }
 
-  #thermostat-panel .next-schedule {
-    text-align: center;
-  }
-
-  #thermostat-panel .next-schedule .circle {
-    line-height: 3vh;
-  }
-
-  #thermostat-panel .next-schedule .circle > .temp {
-    margin-top: 4.3vh;
-    display: inline-block;
-    width: 15vh
-  }
-
-  #thermostat-panel .next-schedule .circle > .next-time {
-    display: inline-block;
-    font-size: 0.7em;
-  }
-
-  #thermostat-panel .next-schedule > .next-time {
-    display: none;
+  #schedule-panel {
+    display: block;
+    width: 75vw;
+    float: left;
   }
 }

@@ -1,3 +1,4 @@
+var path = require('path')
 var express = require('express')
 var TemperatureSensor = require('../lib/temperature-sensor')
 var Rele = require('../lib/rele')
@@ -8,7 +9,7 @@ var rele = new Rele(17)
 var sensor = new TemperatureSensor()
 var thermostat = new Thermostat(rele, sensor)
 
-var db = require('lowdb')('/var/node/default/db/db.json')
+var db = require('lowdb')(path.join(__dirname, '../db/db.json'))
 var Schedules = require('../lib/schedules')
 
 setInterval(function () {

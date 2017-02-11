@@ -1,5 +1,6 @@
+var path = require('path')
 var express = require('express')
-var db = require('lowdb')('/var/node/default/db/db.json')
+var db = require('lowdb')(path.join(__dirname, '../db/db.json'))
 var Schedules = require('../lib/schedules')
 
 var router = express.Router()

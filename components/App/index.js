@@ -1,8 +1,8 @@
 import React from 'react'
 import ReactDom from 'react-dom'
 
-import ThermostatPanel from '../thermostat-panel'
-import SchedulePanel from '../schedule-panel'
+import ThermostatPanel from '../ThermostatPanel'
+import SchedulePanel from '../SchedulesPanel'
 
 class App extends React.Component {
   render () {

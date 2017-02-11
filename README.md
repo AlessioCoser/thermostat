@@ -33,3 +33,6 @@ Look to see whether there is a line that has dtoverlay=w1-gpio in it.  If not, a
 ### set correct timezone and other options on raspberry pi
 
     sudo raspi-config
+
+## Install latest NodeJS
+http://thisdavej.com/beginners-guide-to-installing-node-js-on-a-raspberry-pi/#install-node

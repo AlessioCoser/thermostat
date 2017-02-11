@@ -1,5 +1,8 @@
-class ThermostatPanel extends React.Component {
-  constructor(props) {
+import React from 'react'
+import ajax from '../Ajax'
+
+module.exports = class ThermostatPanel extends React.Component {
+  constructor (props) {
     super(props)
     this.state = {
       url: props.url,
@@ -10,7 +13,7 @@ class ThermostatPanel extends React.Component {
     }
   }
 
-  componentDidMount() {
+  componentDidMount () {
     this.getStatus()
     this.getCurrentSchedule()
     this.getNextSchedule()
@@ -25,60 +28,60 @@ class ThermostatPanel extends React.Component {
     setInterval(() => this.getTemperature(), 300000)
   }
 
-  getStatus() {
+  getStatus () {
     ajax.get('/thermostat/status')
     .then((status) => {
       this.setState({status: status})
     })
   }
 
-  getCurrentSchedule() {
+  getCurrentSchedule () {
     ajax.get('/schedules/current')
     .then((schedule) => {
       this.setState({schedule: schedule})
     })
   }
 
-  getNextSchedule() {
+  getNextSchedule () {
     ajax.get('/schedules/next')
     .then((schedule) => {
       this.setState({nextSchedule: schedule})
     })
   }
 
-  getTemperature() {
+  getTemperature () {
     ajax.get('/thermostat/temperature')
     .then((temperature) => {
       this.setState({temperature: temperature})
     })
   }
 
-  parsePeriod(schedule) {
+  parsePeriod (schedule) {
     if (schedule.fromTime && schedule.toTime) {
-      return schedule.fromTime + " - " + schedule.toTime
+      return schedule.fromTime + ' - ' + schedule.toTime
     }
     return ''
   }
 
-  render() {
+  render () {
     var schedulePeriod = this.parsePeriod(this.state.schedule)
     var nextSchedulePeriod = this.parsePeriod(this.state.nextSchedule)
 
-    return (<div>
+    return (<div id='thermostat-panel'>
       <div className='temperature'>
-        <i className="fa fa-thermometer-full" aria-hidden="true"></i> {this.state.temperature + ' °C'}
+        <i className='fa fa-thermometer-full' aria-hidden='true' /> {this.state.temperature + ' °C'}
       </div>
       <div className='current-schedule'>
         <div className={this.state.status ? 'circle on' : 'circle off'}>
           <div className='circle-inner'>
             <div className='icon'>
-              <i className={this.state.status ? 'fa fa-fire' : 'fa fa-power-off'} aria-hidden="true"></i>
+              <i className={this.state.status ? 'fa fa-fire' : 'fa fa-power-off'} aria-hidden='true' />
             </div>
             <div className='scheduled-temperature'>{this.state.schedule.temperature} °C</div>
             <div className='scheduled-time'>{schedulePeriod}</div>
           </div>
         </div>
-        <i className="fa fa-chevron-down" aria-hidden="true"></i>
+        <i className='fa fa-chevron-down' aria-hidden='true' />
       </div>
       <div className='next-schedule'>
         <span className='circle'>
@@ -90,8 +93,3 @@ class ThermostatPanel extends React.Component {
     </div>)
   }
 }
-
-ReactDOM.render(
-  <ThermostatPanel />,
-  document.getElementById('thermostat-panel')
-)

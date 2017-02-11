@@ -1,4 +1,6 @@
-const ajax = {
+import axios from 'axios'
+
+module.exports = {
   _hasNoErrors: function (response) {
     if ((response.statusText === 'OK') && (!response.data.err)) {
       return true
@@ -10,7 +12,7 @@ const ajax = {
       return response.data.value
     }
   },
-  get: function (url){
+  get: function (url) {
     return axios.get(url)
     .then((response) => this._handleResponse(response))
   }

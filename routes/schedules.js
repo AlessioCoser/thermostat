@@ -10,7 +10,6 @@ router.get('/', function (req, res) {
   res.json({error: false, value: all})
 })
 
-
 router.get('/current', function (req, res) {
   var schedule = schedules.current()
 

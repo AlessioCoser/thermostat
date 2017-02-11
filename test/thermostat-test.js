@@ -7,7 +7,7 @@ const Thermostat = require('../lib/thermostat')
 
 test('Thermostat', function () {
   test('should not change state', function () {
-    test('when rele is turned on and temperature is lower than antifreeze', function() {
+    test('when rele is turned on and temperature is lower than antifreeze', function () {
       var expectedTemperature = null
       var thermostat = new Thermostat(new Rele(1), new TemperatureSensor(4))
 
@@ -32,7 +32,7 @@ test('Thermostat', function () {
   })
 
   test('should I Turn On', function () {
-    test('when rele is turned off and temperature is lower than antifreeze', function() {
+    test('when rele is turned off and temperature is lower than antifreeze', function () {
       var expectedTemperature = null
       var thermostat = new Thermostat(new Rele(0), new TemperatureSensor(4))
 
@@ -49,7 +49,7 @@ test('Thermostat', function () {
   })
 
   test('should I Turn Off', function () {
-    test('when rele is turned on and temperature is higher than antifreeze', function() {
+    test('when rele is turned on and temperature is higher than antifreeze', function () {
       var expectedTemperature = null
       var thermostat = new Thermostat(new Rele(1), new TemperatureSensor(6))
 

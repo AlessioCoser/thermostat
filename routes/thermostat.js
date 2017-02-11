@@ -11,7 +11,7 @@ var thermostat = new Thermostat(rele, sensor)
 var db = require('lowdb')('/var/node/default/db/db.json')
 var Schedules = require('../lib/schedules')
 
-setInterval(function() {
+setInterval(function () {
   var schedules = new Schedules(db)
   var currentSchedule = schedules.current()
   var expectedTemperature = null

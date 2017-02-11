@@ -2,31 +2,33 @@ import React from 'react'
 import Rcslider from 'rc-slider'
 
 const marks = {
-   0.00: <strong>0°C</strong>,
-  14.25: '5 °C',
-  28.50: '10°C',
-  42.75: '15°C',
-  57.00: '20°C',
-  71.25: '25°C',
-  85.50: '30°C',
-  100.0: <strong>35°C</strong>
+   0: <strong>05 °C</strong>,
+  20: '10 °C',
+  40: '15 °C',
+  60: '20 °C',
+  80: '25 °C',
+  100.0: <strong>30 °C</strong>
 }
 
 module.exports = class Schedule extends React.Component {
   constructor (props) {
-    props.unit = props.unit || 2.85
+    props.unit = props.unit || 4
     super(props)
     this.state = {
       schedule: props.temperature || 5
     }
   }
 
+  temperatureUnit () {
+    return this.props.unit || 4
+  }
+
   convertToTemp(value) {
-    return Math.round(value / this.props.unit)
+    return (value / this.temperatureUnit()) + 5
   }
 
   convertFromTemp(value) {
-    return value * this.props.unit
+    return (value - 5) * this.temperatureUnit()
   }
 
   setSchedule (value) {
@@ -39,7 +41,7 @@ module.exports = class Schedule extends React.Component {
       <Rcslider
         min={0}
         marks={marks}
-        step={this.props.unit}
+        step={this.temperatureUnit()}
         onChange={(value) => this.setSchedule(value)}
         defaultValue={this.convertFromTemp(this.state.schedule)}
       />

@@ -10,6 +10,33 @@ html, body {
   box-sizing: border-box;
 }
 
+.hide {
+  display: none !important;
+}
+
+.change-view {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+  display: block;
+  position: fixed;
+  right: 0;
+  top: 0;
+  height: 10vh;
+  width: 70px;
+  line-height: 10vh;
+  color: white;
+  cursor: pointer;
+  font-size: 2em;
+  text-align: center;
+}
+
+.change-view.dark {
+  color: #333;
+}
+
 #thermostat-panel {
   width: 100vw;
   height: 100vh;
@@ -141,17 +168,37 @@ html, body {
 }
 
 #schedule-panel {
-  display: none;
   width: 100vw;
   height: 100vh;
   overflow: hidden;
 }
 
-#schedule-panel > .schedule {
+#schedule-panel > .title {
+  background: #f0f2f3;
+  color: #333;
+  height: 10vh;
+  line-height: 10vh;
+  text-align: center;
+  font-size: 1.3em;
+}
+
+#schedule-panel > .schedules {
+  padding: 0;
+}
+
+#schedule-panel > .schedules > .schedule {
   padding: 30px;
 }
 
 @media only screen and (min-width: 768px) {
+  .hide {
+    display: block !important;
+  }
+
+  .change-view {
+    display: none;
+  }
+
   #thermostat-panel {
     width: 25vw;
     float: left;

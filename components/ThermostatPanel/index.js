@@ -67,7 +67,7 @@ module.exports = class ThermostatPanel extends React.Component {
     var schedulePeriod = this.parsePeriod(this.state.schedule)
     var nextSchedulePeriod = this.parsePeriod(this.state.nextSchedule)
 
-    return (<div id='thermostat-panel'>
+    return (<div id='thermostat-panel' className={this.props.show ? '' : 'hide'}>
       <div className='temperature'>
         <i className='fa fa-thermometer-full' aria-hidden='true' /> {this.state.temperature + ' °C'}
       </div>

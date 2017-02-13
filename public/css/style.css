@@ -10,6 +10,10 @@ html, body {
   box-sizing: border-box;
 }
 
+.clear {
+  clear: both;
+}
+
 .hide {
   display: none !important;
 }
@@ -184,10 +188,36 @@ html, body {
 
 #schedule-panel > .schedules {
   padding: 0;
+  max-height: 90vh;
+  overflow: auto;
 }
 
 #schedule-panel > .schedules > .schedule {
-  padding: 30px;
+  padding: 5px 30px 10px 30px;
+  border-top: 1px solid #e0e0e0;
+}
+
+#schedule-panel > .schedules > .schedule .title {
+  padding-left: 20%;
+}
+
+#schedule-panel > .schedules > .schedule .hour {
+  float: left;
+  width: 20%;
+}
+
+#schedule-panel > .schedules > .schedule .rc-slider {
+  float: left;
+  width: 80%;
+}
+
+#schedule-panel > .schedules > .schedule .rc-slider-mark-text {
+  display: none;
+}
+
+#schedule-panel > .schedules > .schedule .rc-slider-mark-text:last-child {
+  display: block;
+  top: -35px;
 }
 
 @media only screen and (min-width: 768px) {

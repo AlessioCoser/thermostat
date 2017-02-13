@@ -15,7 +15,7 @@ module.exports = class Schedule extends React.Component {
     props.unit = props.unit || 4
     super(props)
     this.state = {
-      schedule: props.temperature || 5
+      schedule: props.temperature || 5,
     }
   }
 
@@ -35,16 +35,26 @@ module.exports = class Schedule extends React.Component {
     this.setState({schedule: this.convertToTemp(value)})
   }
 
+  getHours () {
+    var hours = this.props.hours
+
+    return hours < 10 ? `0${hours}:00` : `${hours}:00`
+  }
+
   render () {
     return (<div className="schedule">
-      <div>{this.state.schedule} °C</div>
-      <Rcslider
-        min={0}
-        marks={marks}
-        step={this.temperatureUnit()}
-        onChange={(value) => this.setSchedule(value)}
-        defaultValue={this.convertFromTemp(this.state.schedule)}
-      />
+      <div className="title">{this.state.schedule} °C</div>
+      <div>
+        <div className="hour">{this.getHours()}</div>
+        <Rcslider
+          min={0}
+          marks={marks}
+          step={this.temperatureUnit()}
+          onChange={(value) => this.setSchedule(value)}
+          defaultValue={this.convertFromTemp(this.state.schedule)}
+        />
+        <div className='clear'></div>
+      </div>
     </div>)
   }
 }

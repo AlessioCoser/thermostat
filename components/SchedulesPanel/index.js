@@ -10,13 +10,18 @@ module.exports = class SchedulePanel extends React.Component {
   }
 
   render () {
+    var schedules = []
+
+    for(var id = 0; id < 24; id++) {
+      schedules.push(<Schedule hours={id} temperature={this.state.schedules[id]} />)
+    }
+
     return (<div id='schedule-panel' className={this.props.show ? '' : 'hide'}>
       <div className='title'>
         <i className='fa fa-bar-chart' aria-hidden='true' /> Fasce Orarie
       </div>
       <div className='schedules'>
-        <Schedule temperature={this.state.schedules[0]} />
-        <Schedule temperature={this.state.schedules[1]} />
+        {schedules}
       </div>
     </div>)
   }
